@@ -11,6 +11,8 @@
       <%= f.label :password %>
       <%= f.password_field :password, class: 'form-control' %>
 
+      <!-- チェックボックスをインライン形状にするlabel要素で
+           checkbox型のinput要素を包む -->
       <%= f.label :remember_me, class: "checkbox inline" do %>
         <%= f.check_box :remember_me %>
         <span>Remember me on this computer</span>
