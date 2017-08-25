@@ -66,12 +66,15 @@ module SessionsHelper
   
   # Redirects to stored location (or to the default).
   def redirect_back_or(default)
+    # フォーワード﨑が設定されていれば、そこにリダイレクト。そうでなければデフォルトにリダイレクト
+    # Sessionsコントローラーのcreateアクションでは、デフォルトはユーザーのページになっている
     redirect_to(session[:forwarding_url] || default)
     session.delete(:forwarding_url)
   end
 
   # Stores the URL trying to be accessed.
   def store_location
+    # 元のURLがあれば、それを記憶
     session[:forwarding_url] = request.original_url if request.get?
   end
 end

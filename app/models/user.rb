@@ -8,6 +8,7 @@ class User < ApplicationRecord
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
   has_secure_password
+  # パスワードが空でも更新を可能にする。新規作成時に空だとhas_secure_passwordではねられる
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
 

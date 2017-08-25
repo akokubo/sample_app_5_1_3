@@ -8,9 +8,12 @@ class UsersIndexTest < ActionDispatch::IntegrationTest
   end
 
   test "index as admin including pagination and delete links" do
+    # indexアクションのテスト
     log_in_as(@admin)
     get users_path
     assert_template 'users/index'
+
+    # ページネーションのテスト
     assert_select 'div.pagination'
     first_page_of_users = User.paginate(page: 1)
     first_page_of_users.each do |user|
@@ -19,11 +22,14 @@ class UsersIndexTest < ActionDispatch::IntegrationTest
         assert_select 'a[href=?]', user_path(user), text: 'delete'
       end
     end
+
+    # deleteリクエストのテスト
     assert_difference 'User.count', -1 do
       delete user_path(@non_admin)
     end
   end
 
+  # 管理者でなければdeleteリンクが表示されない
   test "index as non-admin" do
     log_in_as(@non_admin)
     get users_path

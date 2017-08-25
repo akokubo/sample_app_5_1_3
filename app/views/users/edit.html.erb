@@ -3,6 +3,7 @@
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
+    <%#  Railsは@userが新規ユーザーか否かをnew_recordメソッドで見分け、編集用のフォームを生成 -%>
     <%= form_for(@user) do |f| %>
       <%= render 'shared/error_messages' %>
 
@@ -23,6 +24,7 @@
 
     <div class="gravatar_edit">
       <%= gravatar_for @user %>
+      <!-- 更新するときはGravatarのページを新しいウィンドウで開く -->
       <a href="http://gravatar.com/emails" target="_blank">change</a>
     </div>
   </div>
