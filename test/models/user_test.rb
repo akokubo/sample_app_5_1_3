@@ -69,6 +69,6 @@ class UserTest < ActiveSupport::TestCase
   # ユーザーがまだログインしていなければ、認証されていない
   # remember_tokenを空にしているが、実はその照合以前にfalseが発生する
   test "authenticated? should return false for a user with nil digest" do
-    assert_not @user.authenticated?('')
+    assert_not @user.authenticated?(:remember, '')
   end
 end

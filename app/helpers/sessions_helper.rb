@@ -33,7 +33,7 @@ module SessionsHelper
       # データベースからuser_idに相当するユーザーを取り出しuserに代入
       user = User.find_by(id: user_id)
       # ユーザーが存在し、cookiesに保存されたremember_tokenで認証できれば
-      if user && user.authenticated?(cookies[:remember_token])
+      if user && user.authenticated?(:remember, cookies[:remember_token])
         # ログイン処理を実行
         log_in user
         # @current_userにユーザーを代入
