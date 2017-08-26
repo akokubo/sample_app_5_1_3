@@ -1,7 +1,9 @@
 class User < ApplicationRecord
-  # データベースに存在しないremember_token属性を用意
+  # データベースに存在しないremember_token、activation_token属性を用意
   attr_accessor :remember_token, :activation_token
+  # 保存する前にメールアドレスを小文字化
   before_save   :downcase_email
+  # ユーザーを作る前にだけ有効化ダイジェストを生成
   before_create :create_activation_digest
   validates :name, presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i 
@@ -35,9 +37,15 @@ class User < ApplicationRecord
   end
 
   # Returns true if the given token matches the digest.
+  # attributeに何のトークンかを入れ、tokenにトークンそのものを入れて呼び出す
   def authenticated?(attribute, token)
+    # digest変数に指定した種類のトークンのダイジェストを代入
+    # sendメソッドは、オブジェクトにメッセージを送る
+    # このコードでは、引数を使いメッセージの内容を動的に指定し、
+    # データベースに保存された指定した種類のトークンのダイジェストを取得している
     digest = send("#{attribute}_digest")
     return false if digest.nil?
+    # トークンをダイジェスト化して、保存されたダイジェストと比較
     BCrypt::Password.new(digest).is_password?(token)
   end
 
@@ -67,6 +75,7 @@ class User < ApplicationRecord
     end
 
     # Creates and assigns the activation token and digest
+    # 有効化トークンとそのダイジェストを生成
     def create_activation_digest
       self.activation_token  = User.new_token
       self.activation_digest = User.digest(activation_token)

@@ -3,6 +3,8 @@ require 'test_helper'
 class UsersSignupTest < ActionDispatch::IntegrationTest
 
   def setup
+    # 平行して行われたテストでメールが配信されていると、メールの本数のカウントに影響が
+    # 出るため、クリアしておく
     ActionMailer::Base.deliveries.clear
   end
 
@@ -25,8 +27,13 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
                                          password:              "password",
                                          password_confirmation: "password" } }
     end
+
+    # 1通だけ送信したか？
     assert_equal 1, ActionMailer::Base.deliveries.size
+
+    # 対応したコントローラー(Users)のアクション(create)のインスタンス変数@userの値を取得
     user = assigns(:user)
+    
     assert_not user.activated?
     # Try to log in before activation.
     log_in_as(user)
