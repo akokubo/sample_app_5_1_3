@@ -5,8 +5,8 @@
   <div class="col-md-6 col-md-offset-3">
     <%#  Railsは@userが新規ユーザーか否かをnew_recordメソッドで見分け、編集用のフォームを生成 -%>
     <%= form_for(@user) do |f| %>
-      <%= render 'shared/error_messages' %>
-
+      <%= render 'shared/error_messages', object: f.object %>
+      
       <%= f.label :name %>
       <%= f.text_field :name, class: 'form-control' %>
 
