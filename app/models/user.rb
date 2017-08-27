@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  # データベースに存在しないremember_token、activation_token属性を用意
+  # データベースに存在しないremember_token、activation_token、reset_token属性を用意
   attr_accessor :remember_token, :activation_token, :reset_token
   # 保存する前にメールアドレスを小文字化
   before_save   :downcase_email
@@ -81,6 +81,7 @@ class User < ApplicationRecord
 
   # Returns true if a password reset has expired.
   def password_reset_expired?
+    # パスワード再設定トークンの有効期限を2時間に設定
     reset_sent_at < 2.hours.ago
   end
 
