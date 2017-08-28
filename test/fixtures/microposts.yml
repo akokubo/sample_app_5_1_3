@@ -1,3 +1,4 @@
+# michaelのマイクロポスト
 orange:
   content: "I just ate an orange!"
   created_at: <%= 10.minutes.ago %>
@@ -18,6 +19,7 @@ most_recent:
   created_at: <%= Time.zone.now %>
   user: michael
 
+# 30件作る
 <% 30.times do |n| %>
 micropost_<%= n %>:
   content: <%= Faker::Lorem.sentence(5) %>
@@ -25,6 +27,7 @@ micropost_<%= n %>:
   user: michael
 <% end %>
 
+# michael以外のマイクロポスト
 ants:
   content: "Oh, is that what you want? Because that's how you get ants!"
   created_at: <%= 2.years.ago %>

@@ -7,7 +7,7 @@ class User < ApplicationRecord
   # ユーザーを作る前にだけ有効化ダイジェストを生成
   before_create :create_activation_digest
   validates :name, presence: true, length: { maximum: 50 }
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i 
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, length: { maximum: 255 },
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
@@ -89,6 +89,7 @@ class User < ApplicationRecord
   # Defines a proto-feed.
   # See "Following users" for the full implementation.
   def feed
+    # micropostsと書いても同等
     Micropost.where("user_id = ?", id)
   end
 

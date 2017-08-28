@@ -14,6 +14,8 @@
       <ol class="microposts">
         <%= render @microposts %>
       </ol>
+      <%# usersコントローラー内でUserオブジェクトでないMicropostオブジェクトを
+          ページネーションするので、対象を明示的に指定する -%>
       <%= will_paginate @microposts %>
     <% end %>
   </div>

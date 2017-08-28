@@ -1,5 +1,6 @@
 class MicropostsController < ApplicationController
   before_action :logged_in_user, only: [:create, :destroy]
+  # 自分で投稿したマイクロポストだけ削除可能
   before_action :correct_user,   only: :destroy
 
   def create
@@ -8,6 +9,7 @@ class MicropostsController < ApplicationController
       flash[:success] = "Micropost created!"
       redirect_to root_url
     else
+      # homeを表示させるのに、@feed_itemsが必要なため
       @feed_items = []
       render 'static_pages/home'
     end
@@ -16,6 +18,7 @@ class MicropostsController < ApplicationController
   def destroy
     @micropost.destroy
     flash[:success] = "Micropost deleted"
+    # 削除を実行したページ(なければトップページ)にリダイレクト
     redirect_to request.referrer || root_url
   end
 
@@ -26,6 +29,7 @@ class MicropostsController < ApplicationController
     end
 
     def correct_user
+      # 自分が投稿したマイクロポストからidを検索
       @micropost = current_user.microposts.find_by(id: params[:id])
       redirect_to root_url if @micropost.nil?
     end

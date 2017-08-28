@@ -18,6 +18,7 @@ User.create!(name:  "Example User",
                activated_at: Time.zone.now)
 end
 
+# 6人分のマイクロポストを50件ずつ生成する
 users = User.order(:created_at).take(6)
 50.times do
   content = Faker::Lorem.sentence(5)
