@@ -92,18 +92,28 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "feed should have the right posts" do
+    # フォロー関係
+    # michael -> lana
+    # archer  -> michael
+    # lana    -> michael
     michael = users(:michael)
     archer  = users(:archer)
     lana    = users(:lana)
+
     # Posts from followed user
+    # michaelのフィードにはlanaが含まれる
     lana.microposts.each do |post_following|
       assert michael.feed.include?(post_following)
     end
+
     # Posts from self
+    # michaelのフィードにはmichaelが含まれる
     michael.microposts.each do |post_self|
       assert michael.feed.include?(post_self)
     end
+
     # Posts from unfollowed user
+    # michaelのフィードにはarcherが含まれない
     archer.microposts.each do |post_unfollowed|
       assert_not michael.feed.include?(post_unfollowed)
     end

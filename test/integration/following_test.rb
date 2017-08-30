@@ -10,6 +10,7 @@ class FollowingTest < ActionDispatch::IntegrationTest
 
   test "following page" do
     get following_user_path(@user)
+    # フォローしている人数が0だと以降のテストの意味がなくなるので、チェック
     assert_not @user.following.empty?
     assert_match @user.following.count.to_s, response.body
     @user.following.each do |user|
@@ -19,6 +20,7 @@ class FollowingTest < ActionDispatch::IntegrationTest
 
   test "followers page" do
     get followers_user_path(@user)
+    # フォロワー数が0だと以降のテストの意味がなくなるので、チェック
     assert_not @user.followers.empty?
     assert_match @user.followers.count.to_s, response.body
     @user.followers.each do |user|
@@ -34,6 +36,7 @@ class FollowingTest < ActionDispatch::IntegrationTest
 
   test "should follow a user with Ajax" do
     assert_difference '@user.following.count', 1 do
+      # Ajaxで送信
       post relationships_path, xhr: true, params: { followed_id: @other.id }
     end
   end
@@ -50,6 +53,7 @@ class FollowingTest < ActionDispatch::IntegrationTest
     @user.follow(@other)
     relationship = @user.active_relationships.find_by(followed_id: @other.id)
     assert_difference '@user.following.count', -1 do
+      # Ajaxで送信
       delete relationship_path(relationship), xhr: true
     end
   end

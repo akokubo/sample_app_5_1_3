@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
   resources :users do
+    # memberにより、集合に含まれるある要素(:id)に対するリソースを生成
+    # /users/:id/following、/user/:id/followersが生成
+    # :idを指定せずに集合全体に対するリソースを生成するにはcollection
     member do
       get :following, :followers
     end
@@ -17,5 +20,6 @@ Rails.application.routes.draw do
   # パスワード再設定を行うリソース(newとcreateがエントリー、editとupdateが再設定)
   resources :password_resets,     only: [:new, :create, :edit, :update]
   resources :microposts,          only: [:create, :destroy]
+  # フォロー/フォロー解除のリソース
   resources :relationships,       only: [:create, :destroy]
 end

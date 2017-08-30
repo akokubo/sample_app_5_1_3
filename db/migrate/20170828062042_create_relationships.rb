@@ -8,6 +8,7 @@ class CreateRelationships < ActiveRecord::Migration[5.1]
     end
     add_index :relationships, :follower_id
     add_index :relationships, :followed_id
+    # 重複フォローを防ぐ
     add_index :relationships, [:follower_id, :followed_id], unique: true
   end
 end

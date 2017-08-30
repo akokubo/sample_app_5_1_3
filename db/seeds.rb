@@ -26,6 +26,7 @@ users = User.order(:created_at).take(6)
 end
 
 # Following relationships
+# 最初のユーザーが2から50番目をフォローし、3から40番目からフォローさせる
 users = User.all
 user = users.first
 following = users[2..50]

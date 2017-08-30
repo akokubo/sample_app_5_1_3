@@ -2,6 +2,7 @@
 <div class="row">
   <aside class="col-md-4">
     <section class="user_info">
+      <%# @userには対象ユーザー自身が入っていてそれを表示 -%>
       <%= gravatar_for @user %>
       <h1><%= @user.name %></h1>
       <span><%= link_to "view my profile", @user %></span>
@@ -9,6 +10,7 @@
     </section>
     <section class="stats">
       <%= render 'shared/stats' %>
+      <%# 対象ユーザーのフォローまたはフォロワーが@usersに入っていて、それを表示 -%>
       <% if @users.any? %>
         <div class="user_avatars">
           <% @users.each do |user| %>
@@ -20,6 +22,7 @@
   </aside>
   <div class="col-md-8">
     <h3><%= @title %></h3>
+    <%# 対象ユーザーのフォローまたはフォロワーが@usersに入っていて、それを表示 -%>
     <% if @users.any? %>
       <ul class="users follow">
         <%= render @users %>

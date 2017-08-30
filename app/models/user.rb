@@ -1,12 +1,25 @@
 class User < ApplicationRecord
   has_many :microposts, dependent: :destroy
-  has_many :active_relationships, class_name: "Relationship",
-                                  foreign_key: "follower_id",
-                                  dependent: :destroy
+  # フォローする関係
+  # ActiveRelationshipモデルは存在せず、実態はRelationshipモデル
+  # RelationshipモデルからUserモデルを参照するにはuser_idでなくfollower_idを使用
+  has_many :active_relationships,  class_name: "Relationship",
+                                   foreign_key: "follower_id",
+                                   dependent: :destroy
+  # フォローされる関係
+  # PassiveRelationshipモデルは存在せず、実態はRelationshipモデル
+  # RelationshipモデルからUserモデルを参照するにはuser_idでなくfollowed_idを使用
   has_many :passive_relationships, class_name: "Relationship",
-                                  foreign_key: "followed_id",
-                                  dependent: :destroy
-  has_many :following, through: :active_relationships, source: :followed
+                                   foreign_key: "followed_id",
+                                   dependent: :destroy
+  # 以下のように記述すると、active_relationshipsを経由して、
+  # followedsフォローしている人たちを参照できる
+  # 具体的には@user.followeds
+  # has_many :followeds, through: :active_relationships
+  # しかし、@user.followedsだと英語としておかしく、@user.followingにしたいので
+  # 以下のように記述する
+  has_many :following, through: :active_relationships,  source: :followed
+  # source: :followerは不要だが、上記と同じ形式で書きたかったので指定
   has_many :followers, through: :passive_relationships, source: :follower
   # データベースに存在しないremember_token、activation_token、reset_token属性を用意
   attr_accessor :remember_token, :activation_token, :reset_token
@@ -94,9 +107,13 @@ class User < ApplicationRecord
     reset_sent_at < 2.hours.ago
   end
 
-  # Defines a proto-feed.
-  # See "Following users" for the full implementation.
+  # Returns a user's status feed.
   def feed
+    # フォローしているユーザーと自身のユーザーIDでマイクロポストを検索
+    # Micropost.where("user_id IN (:following_ids) OR user_id = :user_id",
+    #                  following_ids: following_ids, user_id: user_id)
+    # 上記のコードだと、following_idsを求め、次にマイクロポストを検索する
+    # 下記のようにSQLにSQLを埋め込むと検索が1回で済む
     following_ids = "SELECT followed_id FROM relationships
                      WHERE  follower_id = :user_id"
     Micropost.where("user_id IN (#{following_ids})

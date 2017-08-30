@@ -1,3 +1,4 @@
+<%# @userが存在しなければ(static_pages#homeの場合)、current_userを代入 -%>
 <% @user ||= current_user %>
 <div class="stats">
   <a href="<%= following_user_path(@user) %>">

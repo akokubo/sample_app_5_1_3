@@ -16,6 +16,8 @@ module SampleApp513
     # -- all .rb files in that directory are automatically loaded.
     
     # Include the authenticity token in remote forms.
+    # Ajaxに対応しないブラウザでも動作するように
+    # リモートフォームに認証トークンを埋め込む
     config.action_view.embed_authenticity_token_in_remote_forms = true
   end
 end

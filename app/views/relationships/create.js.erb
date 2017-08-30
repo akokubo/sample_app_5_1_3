@@ -1,2 +1,4 @@
+// フォローが実行されると、フォロー解除のフォームに変更
 $("#follow_form").html("<%= escape_javascript(render('users/unfollow')) %>");
+// フォロワー数を更新(対象のユーザーのページなのでフォロワー数が変わる)
 $("#followers").html('<%= @user.followers.count %>');
