@@ -22,16 +22,22 @@ class User < ApplicationRecord
   # source: :followerは不要だが、上記と同じ形式で書きたかったので指定
   has_many :followers, through: :passive_relationships, source: :follower
   # データベースに存在しないremember_token、activation_token、reset_token属性を用意
+
   attr_accessor :remember_token, :activation_token, :reset_token
+
   # 保存する前にメールアドレスを小文字化
   before_save   :downcase_email
   # ユーザーを作る前にだけ有効化ダイジェストを生成
   before_create :create_activation_digest
+
   validates :name, presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  # 連続した..を含んだメールアドレスを許容しない場合
+  # VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   validates :email, presence: true, length: { maximum: 255 },
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
+
   has_secure_password
   # パスワードが空でも更新を可能にする。新規作成時に空だとhas_secure_passwordではねられる
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
@@ -139,7 +145,8 @@ class User < ApplicationRecord
 
     # Converts email to all lower-case.
     def downcase_email
-      self.email = email.downcase
+      # self.email = email.downcase
+      email.downcase!
     end
 
     # Creates and assigns the activation token and digest
