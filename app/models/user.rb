@@ -42,17 +42,25 @@ class User < ApplicationRecord
   # パスワードが空でも更新を可能にする。新規作成時に空だとhas_secure_passwordではねられる
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
-
-  # Returns the hash digest of the given string.
-  def User.digest(string)
-    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
-                                                  BCrypt::Engine.cost
-    BCrypt::Password.create(string, cost: cost)
-  end
-
-  # Returns a random token.
-  def User.new_token
-    SecureRandom.urlsafe_base64
+  # この場合、selfはUserオブジェクトではなく、Userクラスを表す
+  class << self
+    # Returns the hash digest of the given string.
+    # def User.digest(string)
+    # この場合、selfはUserオブジェクトではなく、Userクラスを表す
+    # def self.digest(string)
+    def digest(string)
+      cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
+                                                    BCrypt::Engine.cost
+      BCrypt::Password.create(string, cost: cost)
+    end
+  
+    # Returns a random token.
+    # def User.new_token
+    # この場合、selfはUserオブジェクトではなく、Userクラスを表す
+    # def self.new_token
+    def new_token
+      SecureRandom.urlsafe_base64
+    end
   end
 
   # Remembers a user in the database for use in persistent sessions.
