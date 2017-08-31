@@ -36,6 +36,8 @@ class PasswordResetsController < ApplicationController
       render 'edit'
     elsif @user.update_attributes(user_params)            # Case (4) # パスワード再設定を試みる
       log_in @user
+      # パスワードが再設定されたら、リセットトークン(のダイジェスト)を空に
+      @user.update_attribute(:reset_digest, nil)
       flash[:success] = "Password has been reset."
       redirect_to @user 
     else
