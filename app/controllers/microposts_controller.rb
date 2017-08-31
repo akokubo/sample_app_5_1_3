@@ -19,7 +19,9 @@ class MicropostsController < ApplicationController
     @micropost.destroy
     flash[:success] = "Micropost deleted"
     # 削除を実行したページ(なければトップページ)にリダイレクト
-    redirect_to request.referrer || root_url
+    # redirect_to request.referrer || root_url
+    # 上記と同じ
+    redirect_back(fallback_location: root_url)
   end
 
   private
