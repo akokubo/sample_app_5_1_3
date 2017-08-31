@@ -10,13 +10,21 @@ class UsersIndexTest < ActionDispatch::IntegrationTest
   test "index as admin including pagination and delete links" do
     # indexアクションのテスト
     log_in_as(@admin)
+
+    # 最初の1人のアカウントを無効にする
+    first_page_of_users = User.paginate(page: 1)
+    first_page_of_users.first.toggle!(:activated)
+
     get users_path
     assert_template 'users/index'
 
     # ページネーションのテスト
     assert_select 'div.pagination'
-    first_page_of_users = User.paginate(page: 1)
-    first_page_of_users.each do |user|
+
+    # users#indexの@usersの値(ここには無効なユーザーは含まれないはず)を参照
+    assigns(:users).each do |user|
+      # 個々のユーザーが有効
+      assert user.activated?
       assert_select 'a[href=?]', user_path(user), text: user.name
       unless user == @admin
         assert_select 'a[href=?]', user_path(user), text: 'delete'
