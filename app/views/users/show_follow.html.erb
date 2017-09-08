@@ -5,7 +5,7 @@
       <%# @userには対象ユーザー自身が入っていてそれを表示 -%>
       <%= gravatar_for @user %>
       <h1><%= @user.name %></h1>
-      <span><%= link_to "view my profile", @user %></span>
+      <span><%= link_to t('.view_my_profile'), @user %></span>
       <span><b>Microposts:</b> <%= @user.microposts.count %></span>
     </section>
     <section class="stats">

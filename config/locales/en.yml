@@ -30,4 +30,140 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+### Models ###
+  activerecord:
+    errors:
+      messages:
+        should_be_less_than_5MB: "should be less than 5MB"
+
+### Views ###
+  layouts:
+    footer:
+      the_ruby_on_rails_tutorial_html: 'The <a href="http://www.railstutorial.org/">Ruby on Rails Tutorial</a> by <a href="http://www.michaelhartl.com/">Michael Hartl</a>'
+      news: "News"
+    header:
+      sample_app: "sample app"
+      home: "Home"
+      users_list: "Users"
+      account: "Account"
+      profile: "Profile"
+      settings: "Settings"
+      log_out: "Log out"
+      log_in: "Log in"
+      language: "Select language"
+      ja: "Japanese"
+      en: "English"
+  microposts:
+    micropost:
+      posted: "Posted %{time_ago} ago."
+      delete: "delete"
+      you_sure: "You sure?"
+  password_resets:
+    edit:
+      reset_password: "Reset password"
+      confirmation: "Confirmation"
+      update_password: "Update password"
+    new:
+      forgot_password: "Forgot password"
+      submit: "Submit"
+  sessions:
+    new:
+      log_in: "Log in"
+      forgot_password: "forgot password"
+      remember_me_on_this_computer: "Remeber me on this computer"
+      new_user: "New user? "
+      sign_up_now: "Sign up now!"
+  shared:
+    error_messages:
+      the_form_contains: "The form contains %{errors}."
+      error_count: "error"
+    micropost_form:
+      compose_new_micropost: "Compose new micropost..."
+      post: "Post"
+      maximum_file_size: "Maximum file size is 5MB. Please choose a smaller file."
+    user_info:
+      view_my_profile: "view my profile"
+      micropost_count: "micropost"
+  static_pages:
+    about:
+      title: "About"
+    contact:
+      title: "Contact"
+    help:
+      title: "Help"
+    logged_in_home:
+      micropost_feed: "Micropost Feed"
+  users:
+    follow:
+      follow: "Follow"
+    unfollow:
+      unfollow: "Unfollow"
+    user:
+      delete: "delete"
+      you_sure: "You sure?"
+    edit:
+      edit_user: "Edit user"
+      update_your_profile: "Update your profile"
+      save_changes: "Save changes"
+      change: "change"
+    index:
+      all_users: "All users"
+    new:
+      sign_up: "Sign up"
+      create_my_account: "Create my account"
+    show_follow:
+      view_my_profile: "view my profile"
+
+  # users/show
+  pluralize:
+    micropost:
+      one: "Micropost"
+      other: "Microposts"
+
+### Controllers ###
+  # account_activations/edit
+  account_activated: "Account activated!"
+  invalid_activation_link: "Invalid activation link"
+
+  # appllication/logged_in_user
+  please_log_in: "Please log in."
+
+  # microposts/create
+  micropost_created: "Micropost created!"
+  micropost_deleted: "Micropost deleted"
+
+  # password_resets/create
+  email_sent_with_password_reset_instructions: "Email sent with password reset instructions"
+  email_address_not_found: "Email address not found"
+  # password_resets/update
+  cannot_be_empty: "can't be empty"
+  password_has_been_reset: "Password has been reset."
+  # password_resets/check_expiration
+  password_reset_has_expired: "Password reset has expired."
+
+  # sessions/create
+  account_not_activated: "Account not activated."
+  check_your_email_for_the_activation_link: "Check your email for the activation link."
+  invalid_email_password_combination: "Invalid email/password combination"
+
+  # users/create
+  please_check_your_email_to_activate_your_account: "Please check your email to activate your account."
+  # users/update
+  profile_updated: "Profile updated"
+  # users/destroy
+  user_deleted: "User deleted"
+  # users/following
+  following: "Following"
+  # users/followers
+  followers: "Followers"
+
+### Helpers ###
+  # application_helper
+  ruby_on_rails_tutorial_sample_app: "Ruby on Rails Tutorial Sample App"
+
+### ActionMailer ###
+  user_mailer:
+    account_activation:
+      subject: "Account activation"
+    password_reset:
+      subject: "Password reset"

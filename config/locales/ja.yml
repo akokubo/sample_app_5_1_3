@@ -1,0 +1,176 @@
+ja:
+### Models ###
+  activerecord:
+    models:
+      micropost: "つぶやき"
+      user: "ユーザー"
+    attributes:
+      micropost:
+        content: "つぶやきの本文"
+        user: "ユーザー"
+        created_at: "投稿日時"
+        picture: "画像"
+      user:
+        name: "名前"
+        email: "メールアドレス"
+        password: "パスワード"
+        password_confirmation: "パスワード(確認)"
+        following: "フォロー"
+        follower: "フォロワー"
+    errors:
+      messages:
+        should_be_less_than_5MB: "は5MB以下にしてください"
+        carrierwave_processing_error: "画像をリサイズできません。"
+        carrierwave_integrity_error: "画像ではありません。"
+        carrierwave_download_error: "画像をダウンロードできません。"
+        extension_whitelist_error: "拡張子が%{extension}のファイルはアップロードできません。%{allowed_types}形式だけがアップロードできます。"
+        extension_blacklist_error: "拡張子が%{extension}のファイルはアップロードできません。%{prohibited_types}形式のファイルはアップロードできません。"
+
+### Views ###
+  layouts:
+    footer:
+      the_ruby_on_rails_tutorial_html: '<a href="http://railstutorial.jp/">Ruby on Railsチュートリアル</a> by <a href="http://www.michaelhartl.com/">Michael Hartl</a>'
+      news: "ニュース"
+    header:
+      sample_app: "サンプルアプリ"
+      home: "ホーム"
+      users_list: "ユーザー一覧"
+      account: "アカウント"
+      profile: "ユーザー情報"
+      settings: "設定"
+      log_out: "ログアウト"
+      log_in: "ログイン"
+      language: "言語選択"
+      ja: "日本語"
+      en: "英語"
+  microposts:
+    micropost:
+      posted: "%{time_ago}前に投稿"
+      delete: "削除"
+      you_sure: "本当に削除しますか？"
+  password_resets:
+    edit:
+      reset_password: "パスワードの再設定"
+      confirmation: "確認"
+      update_password: "パスワードの再設定"
+    new:
+      forgot_password: "パスワードの再設定"
+      submit: "実行"
+  sessions:
+    new:
+      log_in: "ログイン"
+      forgot_password: "パスワードをお忘れの場合"
+      remember_me_on_this_computer: "この端末にログイン情報を保存"
+      new_user: "はじめての方は"
+      sign_up_now: "今すぐ登録！"
+  shared:
+    error_messages:
+      the_form_contains: "%{errors}がありました"
+      error_count: "つエラー"
+    micropost_form:
+      compose_new_micropost: "つぶやき…"
+      post: "投稿"
+      maximum_file_size: "ファイルサイズの上限は5MBです。もっと小さいファイルを選んでください。"
+    user_info:
+      view_my_profile: "ユーザー情報を見る"
+      micropost_count: "件のつぶやき"
+  static_pages:
+    about:
+      title: "アプリについて"
+    contact:
+      title: "連絡先"
+    help:
+      title: "ヘルプ"
+    logged_in_home:
+      micropost_feed: "タイムライン"
+  users:
+    follow:
+      follow: "フォロー"
+    unfollow:
+      unfollow: "フォロー解除"
+    user:
+      delete: "削除"
+      you_sure: "本当に削除しますか？"
+    edit:
+      edit_user: "ユーザー情報の編集"
+      update_your_profile: "ユーザー情報の更新"
+      save_changes: "保存"
+      change: "Gravatarでアイコンを変更"
+    index:
+      all_users: "ユーザー一覧"
+    new:
+      sign_up: "登録"
+      create_my_account: "アカウントを作成"
+    show_follow:
+      view_my_profile: "ユーザー情報を見る"
+
+  # users/show
+  pluralize:
+    micropost:
+      one: "つぶやき"
+      other: "つぶやき"
+
+### will_paginate ###
+  will_paginate:
+    previous_label: "&#8592; 前へ"
+    next_label: "次へ &#8594;"
+    page_gap: "&hellip;"
+    page_entries_info:
+      single_page:
+        zero:  "%{model}はありません"
+        one:   "%{model}を表示"
+        other: "全%{count}個の%{model}を表示"
+      single_page_html:
+        zero:  "%{model}はありません"
+        one:   "%{model}を表示"
+        other: "<b>全%{count}個</b>の%{model}を表示"
+      multi_page: "%{from} - %{to}(%{count}個中)の%{model}を表示"
+      multi_page_html: "<b>%{from}&nbsp;-&nbsp;%{to}</b>(<b>%{count}</b>個中)の%{model}を表示"
+
+### Controllers ###
+  # account_activations/edit
+  account_activated: "アカウントが有効になりました！"
+  invalid_activation_link: "アカウントの有効化のリンクがおかしいです"
+
+  # appllication/logged_in_user
+  please_log_in: "ログインしてください。"
+
+  # microposts/create
+  micropost_created: "つぶやきを投稿しました！"
+  micropost_deleted: "つぶやきを削除しました"
+
+  # password_resets/create
+  email_sent_with_password_reset_instructions: "パスワードを再設定するためのメールを送りました"
+  email_address_not_found: "メールアドレスが存在しません"
+  # password_resets/update
+  cannot_be_empty: "空ではいけません"
+  password_has_been_reset: "パスワードが再設定されました。"
+  # password_resets/check_expiration
+  password_reset_has_expired: "パスワード再設定の有効期限を過ぎています。もう一度、再設定の手続きを行ってください。"
+
+  # sessions/create
+  account_not_activated: "アカウントが有効になっていません。"
+  check_your_email_for_the_activation_link: "メールの中のアカウントの有効化のリンクを確認してください。"
+  invalid_email_password_combination: "メールアドレスとパスワードの組み合わせが間違っています"
+
+  # users/create
+  please_check_your_email_to_activate_your_account: "メールを確認して、アカウントを有効にしましょう。"
+  # users/update
+  profile_updated: "ユーザー情報を更新しました"
+  # users/destroy
+  user_deleted: "ユーザーを削除しました"
+  # users/following
+  following: "フォロー"
+  # users/followers
+  followers: "フォロワー"
+
+### Helpers ###
+  # application_helper
+  ruby_on_rails_tutorial_sample_app: "Ruby on Railsチュートリアル サンプルアプリ"
+
+### ActionMailers ###
+  user_mailer:
+    account_activation:
+      subject: "アカウントの有効化"
+    password_reset:
+      subject: "パスワード再設定"

@@ -8,4 +8,4 @@ Welcome to the Sample App! Click on the link below to activate your account:
 
 <%# email: @user.emailを追加すると、リンクしたURLに?email=@user.emailが追加される -%>
 <%= link_to "Activate", edit_account_activation_url(@user.activation_token,
-                                                    email: @user.email) %>
+                                                    email: @user.email, locale: I18n.locale) %>

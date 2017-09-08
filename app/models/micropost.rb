@@ -13,7 +13,7 @@ class Micropost < ApplicationRecord
     def picture_size
       # 5MB上限を設定
       if picture.size > 5.megabytes
-        errors.add(:picture, "should be less than 5MB")
+        errors.add(:picture, I18n.t("activerecord.errors.messages.should_be_less_than_5MB"))
       end
     end
 end

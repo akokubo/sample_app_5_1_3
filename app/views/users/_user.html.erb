@@ -3,7 +3,7 @@
   <%= link_to user.name, user %>
   <%# 管理者で自分以外のユーザーのときに限りdeleteリンクを表示 -%>
   <% if current_user.admin? && !current_user?(user) %>
-    | <%= link_to "delete", user, method: :delete,
-                                  data: { confirm: "You sure?" } %>
+    | <%= link_to t('.delete'), user, method: :delete,
+                                  data: { confirm: t('.you_sure') } %>
   <% end %>
 </li>

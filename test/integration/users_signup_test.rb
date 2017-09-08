@@ -20,7 +20,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     assert_select 'div#error_explanation'
     assert_select 'div.field_with_errors'
     # /usersでなく、/signupに送信するフォームかを検証
-    assert_select 'form[action="/signup"]'
+    assert_select 'form[action$="/signup"]'
   end
 
   test "valid signup information with account activation" do

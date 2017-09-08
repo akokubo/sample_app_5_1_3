@@ -6,7 +6,7 @@ class MicropostsController < ApplicationController
   def create
     @micropost = current_user.microposts.build(micropost_params)
     if @micropost.save
-      flash[:success] = "Micropost created!"
+      flash[:success] = t(:micropost_created)
       redirect_to root_url
     else
       # homeを表示させるのに、@feed_itemsが必要なため
@@ -17,7 +17,7 @@ class MicropostsController < ApplicationController
 
   def destroy
     @micropost.destroy
-    flash[:success] = "Micropost deleted"
+    flash[:success] = t(:micropost_deleted)
     # 削除を実行したページ(なければトップページ)にリダイレクト
     # redirect_to request.referrer || root_url
     # 上記と同じ

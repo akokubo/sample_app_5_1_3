@@ -24,7 +24,8 @@ class UsersProfileTest < ActionDispatch::IntegrationTest
 
   test "test profile stats on home page" do
     log_in_as(@user)
-    get root_path(@user)
+    # get root_path(@user)
+    get root_path
     assert_template 'static_pages/home'
     assert_select 'div.stats', count: 1
     assert_match @user.following.count.to_s, response.body

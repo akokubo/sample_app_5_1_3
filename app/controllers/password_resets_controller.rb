@@ -15,11 +15,11 @@ class PasswordResetsController < ApplicationController
     if @user
       @user.create_reset_digest
       @user.send_password_reset_email
-      flash[:info] = "Email sent with password reset instructions"
+      flash[:info] = t(:email_sent_with_password_reset_instructions)
       redirect_to root_url
     # 指定したメールアドレスに相当するユーザーがいなかったら
     else
-      flash.now[:danger] = "Email address not found"
+      flash.now[:danger] = t(:email_address_not_found)
       render 'new'
     end
   end
@@ -32,13 +32,13 @@ class PasswordResetsController < ApplicationController
   def update
     if params[:user][:password].empty?                    # Case (3) # パスワードが空。検証では空でも通るから(パスワードを変更しないとき)、ここでチェック
       # ActiveRecordがエラーメッセージを追加しないタイプのエラーなので、自分で追加する
-      @user.errors.add(:password, "can't be empty")
+      @user.errors.add(:password, t(:cannot_be_empty))
       render 'edit'
     elsif @user.update_attributes(user_params)            # Case (4) # パスワード再設定を試みる
       log_in @user
       # パスワードが再設定されたら、リセットトークン(のダイジェスト)を空に
       @user.update_attribute(:reset_digest, nil)
-      flash[:success] = "Password has been reset."
+      flash[:success] = t(:password_has_been_reset)
       redirect_to @user 
     else
       render 'edit'                                       # Case (2) # パスワードが検証にひっかかる
@@ -57,7 +57,8 @@ class PasswordResetsController < ApplicationController
 
     # Confirms a valid user.
     def valid_user
-      # ユーザーが存在し、有効化され、再設定トークンで認証できなければはじく
+      # ユーザーが存在し、有効化され、再設定トークンで認証できなければはじいて、
+      # トップページに
       # idにはリセットトークンが入っている
       unless (@user && @user.activated? &&
               @user.authenticated?(:reset, params[:id]))
@@ -68,7 +69,7 @@ class PasswordResetsController < ApplicationController
     # Checks expiration of reset token.
     def check_expiration
       if @user.password_reset_expired?
-        flash[:danger] = "Password reset has expired."
+        flash[:danger] = t(:password_reset_has_expired)
         redirect_to new_password_reset_url
       end
     end

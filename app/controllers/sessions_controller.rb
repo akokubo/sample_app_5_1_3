@@ -12,13 +12,13 @@ class SessionsController < ApplicationController
         # 転送元があればそこに、なければユーザーのページにリダイレクトさせる
         redirect_back_or @user
       else
-        message  = "Account not activated."
-        message += "Check your email for the activation link."
+        message  = t(:account_not_activated)
+        message += t(:check_your_email_for_the_activation_link)
         flash[:warning] = message
         redirect_to root_url
       end
     else
-      flash.now[:danger] = 'Invalid email/password combination' # Not quite right!
+      flash.now[:danger] = t(:invalid_email_password_combination) # Not quite right!
       render 'new'
     end
   end

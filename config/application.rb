@@ -19,5 +19,9 @@ module SampleApp513
     # Ajaxに対応しないブラウザでも動作するように
     # リモートフォームに認証トークンを埋め込む
     config.action_view.embed_authenticity_token_in_remote_forms = true
+
+    config.i18n.available_locales = [:ja, :en]
+    config.i18n.enforce_available_locales = true
+    config.i18n.default_locale = :en
   end
 end
