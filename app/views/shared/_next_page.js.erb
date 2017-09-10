@@ -1,0 +1,11 @@
+// 取得した次のページを追加
+$("<%= @target %>").append("<%= j render @objects %>");
+// 更に次のページがあったら
+<% if @objects.next_page %>
+// 次のページへのリンクを更新
+$(".pagination").replaceWith("<%= j will_paginate @objects %>");
+<% else %>
+// スクロールをやめて、次のページへのリンクを削除
+$(window).off("scroll");
+$(".pagination").remove();
+<% end %>

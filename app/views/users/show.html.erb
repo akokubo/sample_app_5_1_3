@@ -15,12 +15,15 @@
     <%= render 'follow_form' if logged_in? %>
     <% if @user.microposts.any? %>
       <h3><%= t('pluralize.micropost', count: 2) %> (<%= @user.microposts.count %>)</h3>
-      <ol class="microposts">
+      <ol class="microposts" id="microposts">
         <%= render @microposts %>
       </ol>
       <%# usersコントローラー内でUserオブジェクトでないMicropostオブジェクトを
           ページネーションするので、対象を明示的に指定する -%>
-      <%= will_paginate @microposts %>
+      <div id="infinite-scrolling">
+        <div id="loader"></div>
+        <%= will_paginate @microposts %>
+      </div>
     <% end %>
   </div>
 </div>

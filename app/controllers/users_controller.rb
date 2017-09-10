@@ -13,6 +13,14 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     redirect_to root_url and return unless @user.activated?
     @microposts = @user.microposts.paginate(page: params[:page])
+
+    # infinite scrollの表示
+    @objects = @microposts
+    @target = "#microposts"
+    respond_to do |format|
+      format.html
+      format.js { render 'shared/_next_page' }
+    end
   end
 
   def new
@@ -30,7 +38,7 @@ class UsersController < ApplicationController
       render 'new'
     end
   end
-  
+
   def edit
     @user = User.find(params[:id])
   end
@@ -44,7 +52,7 @@ class UsersController < ApplicationController
       render 'edit'
     end
   end
-  
+
   def destroy
     User.find(params[:id]).destroy
     flash[:notice] = t(:user_deleted)
@@ -81,7 +89,7 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
       redirect_to(root_url) unless current_user?(@user)
     end
-    
+
     # Confirm an admin user.
     def admin_user
       redirect_to(root_url) unless current_user.admin?
