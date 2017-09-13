@@ -4,6 +4,7 @@ class PictureUploader < CarrierWave::Uploader::Base
   # include CarrierWave::RMagick
   include CarrierWave::MiniMagick
   # 400x400以内にリサイズする
+  process :fix_exif_rotation
   process resize_to_limit: [400, 400]
 
   # Choose what kind of storage to use for this uploader:
