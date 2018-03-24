@@ -69,6 +69,7 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
     concurrent-ruby (1.0.5-java)
+    crass (1.0.3)
     erubi (1.6.1)
     excon (0.59.0)
     execjs (2.7.0)
@@ -257,7 +258,8 @@ GEM
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
       ruby_dep (~> 1.2)
-    loofah (2.0.3)
+    loofah (2.2.2)
+      crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     lumberjack (1.0.12)
     mail (2.6.6)
@@ -267,7 +269,7 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
     mini_magick (4.8.0)
-    mini_portile2 (2.2.0)
+    mini_portile2 (2.3.0)
     minitest (5.10.3)
     minitest-reporters (1.1.18)
       ansi
@@ -278,13 +280,13 @@ GEM
     nenv (0.3.0)
     nio4r (2.1.0)
     nio4r (2.1.0-java)
-    nokogiri (1.8.0)
-      mini_portile2 (~> 2.2.0)
-    nokogiri (1.8.0-java)
-    nokogiri (1.8.0-x64-mingw32)
-      mini_portile2 (~> 2.2.0)
-    nokogiri (1.8.0-x86-mingw32)
-      mini_portile2 (~> 2.2.0)
+    nokogiri (1.8.2)
+      mini_portile2 (~> 2.3.0)
+    nokogiri (1.8.2-java)
+    nokogiri (1.8.2-x64-mingw32)
+      mini_portile2 (~> 2.3.0)
+    nokogiri (1.8.2-x86-mingw32)
+      mini_portile2 (~> 2.3.0)
     notiffany (0.1.1)
       nenv (~> 0.1)
       shellany (~> 0.0)
@@ -443,4 +445,4 @@ DEPENDENCIES
   will_paginate (= 3.1.6)
 
 BUNDLED WITH
-   1.15.4
+   1.16.1
